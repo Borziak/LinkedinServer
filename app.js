@@ -92,6 +92,25 @@ router.get('/getUser', async (req, res)=>{
     });
 });
 
+router.get('/getEmail', async (req, res)=>{
+    console.log(req.query);
+    request({
+        "uri": 'https://api.linkedin.com/v2/clientAwareMemberHandles?q=members&projection=(elements*(primary,type,handle~))',
+        "headers": {
+            "Authorization": 'Bearer ' + req.query.access_token,
+            "Connection": 'Keep-Alive'
+        },
+        "method": "GET"
+    }, (err, resp, body) => {
+        if (!err) {
+            console.log(body);
+            res.json(JSON.parse(body));
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+});
+
 
 
 

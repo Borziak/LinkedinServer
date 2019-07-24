@@ -5,7 +5,7 @@
     <title>Test connect</title>
 </head>
 <style>
-    #button{
+    .button {
         width: 150px;
         height: 50px;
         display: flex;
@@ -20,16 +20,33 @@
         font-size: 20px;
         cursor: pointer;
     }
+
+    #email {
+        left: 400px;
+    }
 </style>
 <body>
-    <div id="button">
-        Login
-    </div>
+<div id="auth" class="button">
+    Login
+</div>
+
+<div id="email" class="button">
+    Email
+</div>
 
 <script>
-    let button = document.getElementById('button');
+    let button = document.getElementById('auth');
     button.addEventListener('click', function () {
-       window.open('/auth', 'firebaseAuth', 'height=600,width=500');
+        window.open('/auth', 'firebaseAuth', 'height=600,width=500');
+    });
+
+    let email = document.getElementById('email');
+    email.addEventListener('click', function () {
+        let init = {
+            method: 'GET'
+        };
+        let request = new Request('https://2909b5da.ngrok.io/getEmail', init);
+        fetch(request).then((response)=>{return response.json()}).then((json)=>{console.log(json)});
     });
 </script>
 </body>
